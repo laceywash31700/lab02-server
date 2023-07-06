@@ -7,7 +7,7 @@ const handleError = (err, req, res, next) => {
     status: 500,
     message: error,
   };
-  res.status.json(errorObject);
+  res.status(500).json(errorObject);
 };
 
 module.exports = handleError;
