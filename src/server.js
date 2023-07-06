@@ -9,10 +9,17 @@ const validator = require('../middleware/validator');
 function start(port) {
   app.listen(port, () => console.log(`Hey hello , echo....echo...I'm listening in ${port}`));
 }
+app.use(express.json());
 
 app.use(logger);
 
-app.use(express.json());
+
+app.get('/what\'s-up',validator,  (req,res,next) => {
+  const name = req.query.name;
+  !name ? next() : res.status(200).send(`what's up ${name}`);
+  
+});
+
 
 
 app.get('/wat-up-internet/:person' , (req,res) => {
@@ -20,12 +27,10 @@ app.get('/wat-up-internet/:person' , (req,res) => {
 });
 
 
-app.get('/peace', (_, res) => {
+app.get('/peace', (req, res) => {
   res.status(200).send(`Safe surfing internet vagabond. Remember not to download or share any personal information from sites that are sketchy.`);
 });
 
-
-app.get('*', (_,__,next) => next({message: `You are not going anywhere my dude this route doesn't exist`}));
 
 
 app.use('*', handleNotFound);
