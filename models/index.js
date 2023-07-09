@@ -6,7 +6,11 @@ const artist = require('./artist.model.js');
 
 const POSTGRES_URI = process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URI;
 
-let sequelize = new Sequelize(POSTGRES_URI);
+let sequelize = new Sequelize(POSTGRES_URI,{
+  host: 'localhost',
+  dialect: 'postgres',
+  port: 5432,
+});
 
 module.exports = {
   dbConnection: sequelize,
