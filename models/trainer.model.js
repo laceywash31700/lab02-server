@@ -12,8 +12,10 @@ const Trainer = (dbConnection, DataTypes) => {
       allowNull: false
     },
     badges:{
-      type:DataTypes.INTEGER,
+      type:DataTypes.JSONB,
       allowNull: true
     }
   });
 };
+
+module.exports = Trainer;
