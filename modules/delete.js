@@ -1,13 +1,19 @@
 'use strict';
 
-const {Artist} = require('../models/index.js');
-const {Pokemon} = require('../models/index.js');
+const { Artist, trainerCollection, pokemonCollection } = require('../models/index.js');
 
-async function destroyContent(req,res) {
-  const route = req.path.includes('artist') ? Artist : Pokemon;
+function destroyContent(req, res) {
+  const route = req.path.includes('trainer')
+    ? trainerCollection
+    : req.path.includes('pokemon')
+      ? pokemonCollection
+      : Artist;
+  
   const id = parseInt(req.params.id);
-  let target = await route.destroy({where: {id}});
-  res.status(204).json(target);
+  let target = route.destroy({ where: { id } })
+    .then(res => res.status(204).json(target))
+    .catch(err => err);
 }
+  
 
 module.exports = destroyContent;
