@@ -25,8 +25,8 @@ pokemonModel.hasMany(trainerModel, {
   targetKey: 'id'
 });
 
-trainersPokemon.belongsTo(trainerModel);
-trainersPokemon.belongsTo(pokemonModel);
+trainersPokemon.belongsToMany(trainerModel);
+trainersPokemon.belongsToMany(pokemonModel);
 
 const trainerCollection = new Collection(trainerModel);
 const pokemonCollection = new Collection(pokemonModel);
