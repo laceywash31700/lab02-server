@@ -1,20 +1,21 @@
 'use strict';
 
-const { Artist, trainerCollection, pokemonCollection } = require('../models/index.js');
+const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 async function updateContent(req, res) {
-  const route = req.path.includes('trainer')
+  const route = req.path.includes('trainers')
     ? trainerCollection
-    : req.path.includes('pokemon')
-      ? pokemonCollection
-      : Artist;
+    : pokemonCollection;
 
   const id = parseInt(req.params.id);
   const newContent = req.body;
-
-  let updatedContent = route.update(id, newContent)
-    .then(res => res.status(200).json(updatedContent))
-    .catch(err => err);
+  try {
+    let updatedContent = await route.update(id, newContent);
+    res.status(200).json(updatedContent);
+  }
+  catch (err) {
+    res.status(400).send(err);
+  }
 
 }
 

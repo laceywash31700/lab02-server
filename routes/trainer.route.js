@@ -6,10 +6,10 @@ const updateContent = require('../modules/update.js');
 const destroyContent = require('../modules/delete.js');
 const trainer = express.Router();
 
-trainer.get('/trainer', readAll);
-trainer.get('/trainer/:id', readOne);
-trainer.post('/trainer', createContent);
-trainer.put('/trainer/:id', updateContent);
-trainer.delete('/trainer/:id', destroyContent);
+trainer.get('/trainers', readAll);
+trainer.get('/trainers/:id', readOne);
+trainer.post('/trainers', createContent);
+trainer.put('/trainers/:id', updateContent);
+trainer.delete('/trainers/:id', destroyContent);
 
 module.exports = trainer;
