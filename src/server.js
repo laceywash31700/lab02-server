@@ -9,7 +9,7 @@ const handleError = require('../error-handler/500.js');
 const logger = require('../middleware/logger.js');
 const validator = require('../middleware/validator.js');
 const pokemonRoutes = require('../routes/pokemon.route.js');
-const artistRoutes = require('../routes/artist.route.js');
+const trainerRoutes = require('../routes/trainer.route.js');
 
 function start(port) {
   app.listen(port, () => console.log(`Hey .....hello , echo..echo...echo I'm listening in port ${port}`));
@@ -38,7 +38,7 @@ app.get('/peace', (req, res) => {
 });
 
 app.use(pokemonRoutes);
-app.use(artistRoutes);
+app.use(trainerRoutes);
 
 
 app.use('*', handleNotFound);

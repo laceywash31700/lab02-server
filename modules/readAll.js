@@ -1,24 +1,28 @@
 'use strict';
 
-const { Artist, trainerCollection, pokemonCollection } = require('../models/index.js');
+const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 async function readAll(req, res) {
-  const route = req.path.includes('trainer')
+  console.log(req.path);
+  const route = req.path.includes('trainers')
     ? trainerCollection
-    : req.path.includes('pokemon')
-      ? pokemonCollection
-      : Artist;
-  
-  const model = req.path.includes('trainer')
+    : pokemonCollection;
+
+  const model = req.path.includes('trainers')
     ? pokemonCollection.model
     : req.path.includes('pokemon')
       ? trainerCollection.model
       : null;
-  
-  let content = route.get(null, {
-    include: { model: model}})
-    .then(res => res.status(200).json(content))
-    .catch(err => err);
+ 
+  try {
+    let content = await route.get(null, {
+      include: { model: model }
+    });
+    res.status(200).json(content);
+  }
+  catch (e) {
+    console.error(e);
+  }
 }
 
 module.exports = readAll;

@@ -1,20 +1,21 @@
 'use strict';
 
-const { Artist, trainerCollection, pokemonCollection } = require('../models/index.js');
+const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 
-function createContent(req, res) {
-  const route = req.path.includes('trainer')
-    ? trainerCollection
-    : req.path.includes('pokemon')
-      ? pokemonCollection
-      : Artist;
+async function createContent(req, res) {
+  const route = req.path.includes('trainers') ? trainerCollection: pokemonCollection;
+     
 
   const newContent = req.body;
-  let savedContent = route.create(newContent)
-    .then(res => res.status(200).json(savedContent))
-    .catch(err => err);
-  
+  try {
+    let savedContent = await route.create(newContent);
+    res.status(200).json(savedContent);
+  }
+  catch (err) {
+    res.status(400).send(err);
+  }
+
 }
 
 module.exports = createContent;
