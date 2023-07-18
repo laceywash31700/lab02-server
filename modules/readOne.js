@@ -3,9 +3,7 @@
 const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 async function readOne(req, res) {
-  const route = req.path.includes('trainer')
-    ? trainerCollection
-    : pokemonCollection;
+  const route = req.path.includes('trainer') ? trainerCollection : pokemonCollection;
   
   const model = req.path.includes('trainer')
     ? pokemonCollection.model
