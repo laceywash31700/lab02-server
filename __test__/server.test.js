@@ -84,9 +84,12 @@ describe('testing if all routes for this server are functioning properly', () =>
     });
   });
 
-  xit('can update pokemon', async () => {
+  it('can update pokemon', async () => {
     pokemon.isLegendary = true;
-    const response = await request.put('/pokemon/1', pokemon);
+    let newContent = pokemon;
+    console.log('hey i am the new content',newContent);
+    const response = await request.put('/pokemon/1').send(newContent);
+    console.log('HEY I AM IN UPDATE ROUTE', response.body);
     expect(response.body.isLegendary).toBe(true);
   });
 
