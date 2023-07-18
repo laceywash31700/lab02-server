@@ -3,10 +3,7 @@
 const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 async function readAll(req, res) {
-  console.log(req.path);
-  const route = req.path.includes('trainers')
-    ? trainerCollection
-    : pokemonCollection;
+  const route = req.path.includes('trainers') ? trainerCollection : pokemonCollection;
 
   const model = req.path.includes('trainers')
     ? pokemonCollection.model

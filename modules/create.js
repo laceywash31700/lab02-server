@@ -4,7 +4,7 @@ const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 
 async function createContent(req, res) {
-  const route = req.path.includes('trainers') ? trainerCollection: pokemonCollection;
+  const route = req.path.includes('trainers') ? trainerCollection : pokemonCollection;
      
 
   const newContent = req.body;

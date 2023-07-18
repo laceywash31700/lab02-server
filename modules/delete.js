@@ -3,7 +3,7 @@
 const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 async function destroyContent(req, res) {
-  const route = req.path.includes('trainers')? trainerCollection: pokemonCollection ;
+  const route = req.path.includes('trainers') ? trainerCollection : pokemonCollection ;
       
   try {
     const id = parseInt(req.params.id);

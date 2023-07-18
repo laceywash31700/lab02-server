@@ -3,9 +3,7 @@
 const { trainerCollection, pokemonCollection } = require('../models/index.js');
 
 async function updateContent(req, res) {
-  const route = req.path.includes('trainers')
-    ? trainerCollection
-    : pokemonCollection;
+  const route = req.path.includes('trainers') ? trainerCollection : pokemonCollection;
 
   const id = parseInt(req.params.id);
   const newContent = req.body;
